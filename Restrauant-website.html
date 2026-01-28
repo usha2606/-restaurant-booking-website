@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FineDine – Restaurant Table Booking</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root{--brand:#ff9f1c;--bg:#0f172a;--card:#111827ee;--muted:#94a3b8;--ok:#16a34a;--bad:#ef4444;}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Poppins,system-ui; color:#fff;
+       background:#000 url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1600&auto=format&fit=crop') center/cover fixed no-repeat;}
+  .overlay{background:linear-gradient(180deg,#0b1224cc,#0b1224cc);min-height:100vh}
+  header{position:sticky;top:0;z-index:5;background:rgba(8,12,24,.7);backdrop-filter: blur(8px);border-bottom:1px solid #1f2937;}
+  .nav{max-width:1100px;margin:auto;display:flex;align-items:center;gap:16px;padding:12px 16px}
+  .logo{font-weight:700;color:var(--brand)}
+  .nav a{color:#e5e7eb;text-decoration:none;padding:8px 12px;border-radius:12px}
+  .nav a:hover{background:#1f2937}
+  .cta{margin-left:auto;background:var(--brand);color:#111827;padding:10px 14px;border-radius:14px;font-weight:700}
+  main{max-width:1100px;margin:0 auto;padding:28px 16px 72px}
+  .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:40px 0}
+  .hero h1{font-size:48px;margin:0 0 12px}
+  .hero p{color:var(--muted);margin:0 0 24px}
+  .btn{background:var(--brand);color:#111827;border:none;padding:12px 18px;border-radius:14px;font-weight:700;cursor:pointer}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .card{background:var(--card);border:1px solid #1f2937;border-radius:20px;padding:18px;box-shadow:0 10px 30px #00000055}
+  h2{margin:0 0 12px} label{display:block;font-size:14px;color:#cbd5e1;margin:10px 0 6px}
+  input,select,textarea{width:100%;background:#0b1020;color:#e5e7eb;border:1px solid #243044;border-radius:12px;padding:12px 14px;outline:none}
+  textarea{min-height:80px;resize:vertical}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .muted{color:var(--muted)} .success{color:var(--ok)} footer{opacity:.8;text-align:center;padding:28px 0;color:#94a3b8}
+  
+  @media (max-width:900px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.hero h1{font-size:36px}}
+</style>
+</head>
+<body>
+<div class="overlay">
+  <header>
+    <nav class="nav">
+      <div class="logo">🍴 FineDine</div>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="#live booking">live booking</a>
+      <a class="cta" href="#book">Book a Table</a>
+    </nav>
+  </header>
+
+  <main id="home">
+    <!-- Hero -->
+    <section class="hero card">
+      <div>
+        <h1>Enjoy Our Delicious Meal</h1>
+        <p>Book your table in seconds. Instant booking code. Track status anytime.</p>
+        <a href="#book" class="btn">Book a Table</a>
+      </div>
+      <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=1200&auto=format&fit=crop"
+           alt="grill" style="width:100%;border-radius:18px;border:1px solid #1f2937">
+    </section>
+
+    <!-- Booking Section -->
+    <section id="book" class="grid">
+      <div class="card">
+        <h2>Book a Table</h2>
+        <form id="bookForm">
+          <label>Name</label>
+          <input id="name" required placeholder="Your full name">
+          <div class="row">
+            <div>
+              <label>Phone</label>
+              <input id="phone" required placeholder="10-digit phone">
+            </div>
+            <div>
+              <label>Guests</label>
+              <select id="table_size" required>
+                <option value="">Select</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8+</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label>Date</label>
+              <input id="date" type="date" required>
+            </div>
+            <div>
+              <label>Time</label>
+              <input id="time" type="time" required>
+            </div>
+          </div>
+          <label>Special Requests (optional)</label>
+          <textarea id="notes" placeholder="Birthday, seating preference, etc."></textarea>
+          <br><br>
+          <button class="btn" type="submit">Submit Booking</button>
+        </form>
+        <p><a href="view_bookings.php">View All Bookings</a></p>
+        <p><a href="view_bookings.html">View All Bookings</a></p>
+
+        <div id="bookResult" style="margin-top:12px"></div>
+        <h3 style="margin-top:12px">Live Bookings:</h3>
+        <ul id="bookingList"></ul>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="card" style="margin-top:24px">
+      <h2>About</h2>
+      <p class="muted"> Open 10.00AM to 12PM daily.</p>
+        <p>We serve grills, steaks and Indian fusion.</p>
+        <p>🍴 Book your table quickly and easily!</p>
+        <p>❤️ Enjoy a delightful and stress-free dining experience every time.</p>
+        <p>✨ Quick reservations and instant confirmation 📩
+          ❤️ Celebrate every meal with comfort, joy, and hassle-free service.</p>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="card" style="margin-top:24px">
+      <h2>Contact</h2>
+      <p class="muted">
+      <p>We’d love to hear from you! Whether you have a question, feedback, or need assistance with your booking, we’re here to help.</p>
+
+        <p>Each Us:</p>
+        
+       <p> 📞Phone: +91 98765 43210 📱</p> 
+        
+       <p>  ✉ Email: support@finedine.com</p> 
+         
+        
+         <p></p>🏠Address: 123 Foodie Street, City Name, India </p> 
+         <br>
+         <br>
+  
+        
+        <p>✨ Your feedback helps us serve you better!</p>
+    </section>
+    <!--live booking -->
+       <section id="live bookings" clss="card" style="margin-top: 24px";></section>
+        <h2>Live Booking</h2>
+        <p class="muted">
+          <
+        </p>
+     <!-- status -->
+     <section id="Status" class="card" style="margin-top:24px"  >
+      <h2>status</h2> 
+      <p>Follow Us:</p>
+      <br>
+       <p>👍Facebook | 📸Instagram | 🐦Twitter  </p>
+
+  </main>
+   
+
+  <footer>© <span id="yr"></span> FineDine. All rights reserved.</footer>
+</div>
+
+<!-- Firebase Script -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+
+// 🔹 Firebase config (replace with your own project values!)
+  const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "restaurant-table-booking-9e8f9.firebaseapp.com",
+  databaseURL: "https://restaurant-table-booking-9e8f9-default-rtdb.firebaseio.com",
+  projectId: "restaurant-table-booking-9e8f9",
+  storageBucket: "restaurant-table-booking-9e8f9.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+
+
+// Init Firebase
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+const form = document.getElementById('bookForm');
+form.addEventListener('submit', (e)=>{
+  e.preventDefault(); // Prevent default submit
+  const name = document.getElementById('name').value;
+  const phone = document.getElementById('phone').value;
+  const date = document.getElementById('date').value;
+  const time = document.getElementById('time').value;
+  const tableSize = document.getElementById('table_size').value;
+  const notes = document.getElementById('notes').value;
+
+  // Save booking in Firebase
+  const bookingsRef = ref(db,'bookings');
+  const newBookingRef = push(bookingsRef);
+  set(newBookingRef,{
+    name, phone, date, time, tableSize, notes,
+    status:"pending",
+    createdAt: new Date().toISOString()
+  });
+
+  // Show success message
+  document.getElementById('bookResult').innerHTML = `
+    <p class="success">
+      Thanks <strong>${name}</strong>!<br>
+      Your table for <strong>${tableSize} guest(s)</strong> is booked on <strong>${date}</strong> at <strong>${time}</strong>.<br>
+      We look forward to serving you! 🍴
+    </p>`;
+
+  form.reset(); // Clear form
+});
+
+// Live bookings display
+const bookingList = document.getElementById('bookingList');
+onValue(ref(db,'bookings'), (snapshot)=>{
+  const bookings = snapshot.val();
+  let output = "";
+  for(let id in bookings){
+    const b = bookings[id];
+    output += `<li>${b.name} - ${b.date} ${b.time} - Guests: ${b.tableSize} - Status: ${b.status}</li>`;
+  }
+  bookingList.innerHTML = output;
+});
+
+// Footer year
+document.getElementById('yr').innerText = new Date().getFullYear();
+</script>
+</body>
+</html>
